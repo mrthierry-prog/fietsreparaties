@@ -3,16 +3,13 @@ const fietsnaamVeld = document.getElementById("fietsnaam");
 const inkoopprijsVeld = document.getElementById("inkoopprijs");
 const reparatiesVeld = document.getElementById("reparaties");
 const statusVeld = document.getElementById("status");
+const fietsenLijst = document.getElementById("fietsen-lijst");
 
 let fietsen = JSON.parse(localStorage.getItem("opknapfietsen")) || [];
 
-const lijstTitel = document.createElement("h2");
-lijstTitel.textContent = "Mijn opgeslagen opknapfietsen";
-
-const fietsenLijst = document.createElement("div");
-fietsenLijst.id = "fietsen-lijst";
-
-formulier.after(lijstTitel, fietsenLijst);
+function fietsenOpslaan() {
+    localStorage.setItem("opknapfietsen", JSON.stringify(fietsen));
+}
 
 function fietsenTonen() {
     fietsenLijst.innerHTML = "";
@@ -32,10 +29,12 @@ function fietsenTonen() {
         titel.textContent = fiets.naam;
 
         const prijs = document.createElement("p");
-        prijs.textContent = "Inkoopprijs: €" + fiets.inkoopprijs.toFixed(2);
+        prijs.textContent =
+            "Inkoopprijs: €" + fiets.inkoopprijs.toFixed(2).replace(".", ",");
 
-        const reparaties = document.createElement("p");
-        reparaties.textContent = "Werkzaamheden: " + fiets.reparaties;
+        const werkzaamheden = document.createElement("p");
+        werkzaamheden.textContent =
+            "Werkzaamheden: " + fiets.reparaties;
 
         const status = document.createElement("p");
         status.textContent = "Status: " + fiets.status;
@@ -53,24 +52,33 @@ function fietsenTonen() {
             fietsenTonen();
         });
 
-        kaart.append(titel, prijs, reparaties, status, verwijderKnop);
+        kaart.append(
+            titel,
+            prijs,
+            werkzaamheden,
+            status,
+            verwijderKnop
+        );
+
         fietsenLijst.appendChild(kaart);
     });
-}
-
-function fietsenOpslaan() {
-    localStorage.setItem("opknapfietsen", JSON.stringify(fietsen));
 }
 
 formulier.addEventListener("submit", function (gebeurtenis) {
     gebeurtenis.preventDefault();
 
     const naam = fietsnaamVeld.value.trim();
+    const prijsTekst = inkoopprijsVeld.value.trim().replace(",", ".");
+    const inkoopprijs = Number(prijsTekst);
     const reparaties = reparatiesVeld.value.trim();
-    const inkoopprijs = Number(inkoopprijsVeld.value);
 
     if (naam === "") {
-        alert("Vul eerst een naam voor de fiets in.");
+        alert("Vul een naam voor de fiets in.");
+        return;
+    }
+
+    if (prijsTekst === "" || Number.isNaN(inkoopprijs)) {
+        alert("Vul een geldige inkoopprijs in.");
         return;
     }
 
@@ -83,9 +91,13 @@ formulier.addEventListener("submit", function (gebeurtenis) {
     };
 
     fietsen.push(nieuweFiets);
+
     fietsenOpslaan();
     fietsenTonen();
+
     formulier.reset();
+
+    alert("De opknapfiets is opgeslagen!");
 });
 
 fietsenTonen();
