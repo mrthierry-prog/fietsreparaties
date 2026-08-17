@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Reparatiefietsen</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -19,19 +21,49 @@
         <h2>Nieuwe reparatiefiets</h2>
 
         <form id="reparatie-formulier">
-            <label for="fietsnaam">Naam of omschrijving van de fiets</label>
-            <input type="text" id="fietsnaam">
+            <label for="fietsnaam">
+                Naam of omschrijving van de fiets
+            </label>
 
-            <label for="eigenaar">Voornaam of bijnaam eigenaar</label>
-            <input type="text" id="eigenaar">
+            <input
+                type="text"
+                id="fietsnaam"
+                placeholder="Bijvoorbeeld: Rode meisjesfiets"
+                required
+            >
 
-            <label for="reparaties">Wat moet gerepareerd worden?</label>
-            <textarea id="reparaties"></textarea>
+            <label for="eigenaar">
+                Voornaam of bijnaam van de eigenaar
+            </label>
+
+            <input
+                type="text"
+                id="eigenaar"
+                placeholder="Gebruik geen volledige naam"
+                required
+            >
+
+            <label for="reparaties">
+                Wat moet gerepareerd worden?
+            </label>
+
+            <textarea
+                id="reparaties"
+                placeholder="Bijvoorbeeld: ketting en achterlicht"
+            ></textarea>
 
             <label for="kosten">Kosten van onderdelen</label>
-            <input type="number" id="kosten">
+
+            <input
+                type="text"
+                inputmode="decimal"
+                id="kosten"
+                placeholder="Bijvoorbeeld: 12,50"
+                required
+            >
 
             <label for="status">Status</label>
+
             <select id="status">
                 <option>Binnengekomen</option>
                 <option>Bezig</option>
@@ -40,8 +72,17 @@
                 <option>Opgehaald</option>
             </select>
 
-            <button type="submit">Reparatiefiets opslaan</button>
+            <button type="submit">
+                Reparatiefiets opslaan
+            </button>
         </form>
+
+        <section>
+            <h2>Mijn opgeslagen reparatiefietsen</h2>
+            <div id="reparatie-lijst"></div>
+        </section>
     </main>
+
+    <script src="reparatie-fietsen.js?v=1"></script>
 </body>
 </html>
