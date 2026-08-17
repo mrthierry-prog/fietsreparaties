@@ -20,13 +20,28 @@
 
         <form id="opknap-formulier">
             <label for="fietsnaam">Naam van de fiets</label>
-            <input type="text" id="fietsnaam">
+            <input
+                type="text"
+                id="fietsnaam"
+                placeholder="Bijvoorbeeld: Blauwe kinderfiets"
+                required
+            >
 
-            <label for="inkoopprijs">Inkoopprijs</label>
-            <input type="number" id="inkoopprijs">
+            <label for="inkoopprijs">Inkoopprijs in euro’s</label>
+            <input
+                type="number"
+                id="inkoopprijs"
+                min="0"
+                step="0.01"
+                placeholder="Bijvoorbeeld: 25"
+                required
+            >
 
             <label for="reparaties">Wat moet eraan gebeuren?</label>
-            <textarea id="reparaties"></textarea>
+            <textarea
+                id="reparaties"
+                placeholder="Bijvoorbeeld: nieuwe band en remmen afstellen"
+            ></textarea>
 
             <label for="status">Status</label>
             <select id="status">
@@ -39,5 +54,7 @@
             <button type="submit">Opknapfiets opslaan</button>
         </form>
     </main>
+
+    <script src="eigen-fietsen.js"></script>
 </body>
 </html>
