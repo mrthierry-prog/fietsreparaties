@@ -38,9 +38,28 @@
                 id="inkoopprijs"
                 placeholder="Bijvoorbeeld: 25,50"
                 required
-            >
 
-            <label for="reparaties">Wat moet eraan gebeuren?</label>
+                                               <label for="onderdelenkosten">Kosten van onderdelen</label>
+
+<input
+    type="text"
+    inputmode="decimal"
+    id="onderdelenkosten"
+    placeholder="Bijvoorbeeld: 12,50"
+    required
+>
+
+<label for="verkoopprijs">
+    Verkoopprijs (mag nog leeg blijven)
+</label>
+
+<input
+    type="text"
+    inputmode="decimal"
+    id="verkoopprijs"
+    placeholder="Bijvoorbeeld: 85"
+>
+                 <label for="reparaties">Wat moet eraan gebeuren?</label>
 
             <textarea
                 id="reparaties"
@@ -64,7 +83,6 @@
             <div id="fietsen-lijst"></div>
         </section>
     </main>
-
-    <script src="eigen-fietsen.js"></script>
+<script src="eigen-fietsen.js?v=6"></script>
 </body>
 </html>
