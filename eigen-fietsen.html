@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mijn opknapfietsen</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>🚲 Mijn opknapfietsen</h1>
+        <p>Hier houd ik bij welke fietsen ik zelf opknap.</p>
+    </header>
+
+    <main>
+        <a href="index.html">← Terug naar de homepagina</a>
+
+        <h2>Nieuwe opknapfiets</h2>
+
+        <form id="opknap-formulier">
+            <label for="fietsnaam">Naam van de fiets</label>
+            <input type="text" id="fietsnaam">
+
+            <label for="inkoopprijs">Inkoopprijs</label>
+            <input type="number" id="inkoopprijs">
+
+            <label for="reparaties">Wat moet eraan gebeuren?</label>
+            <textarea id="reparaties"></textarea>
+
+            <label for="status">Status</label>
+            <select id="status">
+                <option>Gekocht</option>
+                <option>Bezig met opknappen</option>
+                <option>Klaar voor verkoop</option>
+                <option>Verkocht</option>
+            </select>
+
+            <button type="submit">Opknapfiets opslaan</button>
+        </form>
+    </main>
+</body>
+</html>
