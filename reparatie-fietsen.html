@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reparatiefietsen</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>🔧 Reparatiefietsen</h1>
+        <p>Hier houd ik reparaties voor andere mensen bij.</p>
+    </header>
+
+    <main>
+        <a href="index.html">← Terug naar de homepagina</a>
+
+        <h2>Nieuwe reparatiefiets</h2>
+
+        <form id="reparatie-formulier">
+            <label for="fietsnaam">Naam of omschrijving van de fiets</label>
+            <input type="text" id="fietsnaam">
+
+            <label for="eigenaar">Voornaam of bijnaam eigenaar</label>
+            <input type="text" id="eigenaar">
+
+            <label for="reparaties">Wat moet gerepareerd worden?</label>
+            <textarea id="reparaties"></textarea>
+
+            <label for="kosten">Kosten van onderdelen</label>
+            <input type="number" id="kosten">
+
+            <label for="status">Status</label>
+            <select id="status">
+                <option>Binnengekomen</option>
+                <option>Bezig</option>
+                <option>Wachten op onderdelen</option>
+                <option>Klaar</option>
+                <option>Opgehaald</option>
+            </select>
+
+            <button type="submit">Reparatiefiets opslaan</button>
+        </form>
+    </main>
+</body>
+</html>
