@@ -4,85 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Reparatiefietsen</title>
+    <title>Mijn opknapfietsen</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <header>
-        <h1>🔧 Reparatiefietsen</h1>
-        <p>Hier houd ik reparaties voor andere mensen bij.</p>
+        <h1>🚲 Mijn opknapfietsen</h1>
+        <p>Hier houd ik bij welke fietsen ik zelf opknap.</p>
     </header>
 
     <main>
         <a href="index.html">← Terug naar de homepagina</a>
 
-        <h2>Nieuwe reparatiefiets</h2>
+        <h2>Nieuwe opknapfiets</h2>
 
-        <form id="reparatie-formulier">
-            <label for="fietsnaam">
-                Naam of omschrijving van de fiets
-            </label>
+        <form id="opknap-formulier">
+            <label for="fietsnaam">Naam van de fiets</label>
 
             <input
                 type="text"
                 id="fietsnaam"
-                placeholder="Bijvoorbeeld: Rode meisjesfiets"
+                placeholder="Bijvoorbeeld: Blauwe kinderfiets"
                 required
             >
 
-            <label for="eigenaar">
-                Voornaam of bijnaam van de eigenaar
-            </label>
-
-            <input
-                type="text"
-                id="eigenaar"
-                placeholder="Gebruik geen volledige naam"
-                required
-            >
-
-            <label for="reparaties">
-                Wat moet gerepareerd worden?
-            </label>
-
-            <textarea
-                id="reparaties"
-                placeholder="Bijvoorbeeld: ketting en achterlicht"
-            ></textarea>
-
-            <label for="kosten">Kosten van onderdelen</label>
+            <label for="inkoopprijs">Inkoopprijs</label>
 
             <input
                 type="text"
                 inputmode="decimal"
-                id="kosten"
+                id="inkoopprijs"
+                placeholder="Bijvoorbeeld: 25,50"
+                required
+            >
+
+            <label for="onderdelenkosten">Kosten van onderdelen</label>
+
+            <input
+                type="text"
+                inputmode="decimal"
+                id="onderdelenkosten"
                 placeholder="Bijvoorbeeld: 12,50"
                 required
             >
 
+            <label for="verkoopprijs">
+                Verkoopprijs (mag nog leeg blijven)
+            </label>
+
+            <input
+                type="text"
+                inputmode="decimal"
+                id="verkoopprijs"
+                placeholder="Bijvoorbeeld: 85"
+            >
+
+            <label for="reparaties">Wat moet eraan gebeuren?</label>
+
+            <textarea
+                id="reparaties"
+                placeholder="Bijvoorbeeld: nieuwe band en remmen afstellen"
+            ></textarea>
+
             <label for="status">Status</label>
 
             <select id="status">
-                <option>Binnengekomen</option>
-                <option>Bezig</option>
-                <option>Wachten op onderdelen</option>
-                <option>Klaar</option>
-                <option>Opgehaald</option>
+                <option>Gekocht</option>
+                <option>Bezig met opknappen</option>
+                <option>Klaar voor verkoop</option>
+                <option>Verkocht</option>
             </select>
 
-            <button type="submit">
-                Reparatiefiets opslaan
-            </button>
+            <button type="submit">Opknapfiets opslaan</button>
         </form>
 
         <section>
-            <h2>Mijn opgeslagen reparatiefietsen</h2>
-            <div id="reparatie-lijst"></div>
+            <h2>Mijn opgeslagen opknapfietsen</h2>
+            <div id="fietsen-lijst"></div>
         </section>
     </main>
 
-    <script src="reparatie-fietsen.js?v=1"></script>
+    <script src="eigen-fietsen.js?v=3"></script>
 </body>
 </html>
