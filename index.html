@@ -14,10 +14,30 @@
     </header>
 
     <main>
-        <h2>Mijn fietsen</h2>
-        <p>Er zijn nog geen fietsen toegevoegd.</p>
+        <<main>
+    <h2>Nieuwe fiets toevoegen</h2>
 
-        <button>Nieuwe fiets toevoegen</button>
+    <form id="fiets-formulier">
+        <label for="fietsnaam">Naam van de fiets</label>
+        <input type="text" id="fietsnaam" placeholder="Bijvoorbeeld: Blauwe kinderfiets">
+
+        <label for="eigenaar">Voornaam of bijnaam eigenaar</label>
+        <input type="text" id="eigenaar" placeholder="Geen volledige naam">
+
+        <label for="reparaties">Benodigde reparaties</label>
+        <textarea id="reparaties" placeholder="Bijvoorbeeld: band plakken en remmen afstellen"></textarea>
+
+        <label for="status">Status</label>
+        <select id="status">
+            <option>Binnengekomen</option>
+            <option>Bezig</option>
+            <option>Klaar</option>
+            <option>Verkocht</option>
+        </select>
+
+        <button type="submit">Fiets opslaan</button>
+    </form>
+</main>
     </main>
 </body>
 </html>
