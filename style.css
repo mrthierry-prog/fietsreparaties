@@ -1,81 +1,136 @@
+:root {
+    --groen: #1d9b68;
+    --donkergroen: #14734e;
+    --lichtgroen: #e5f7ef;
+    --oranje: #ff9f1c;
+    --donkeroranje: #e78600;
+    --rood: #dc4c4c;
+    --blauw: #3987d7;
+    --tekst: #24332d;
+    --achtergrond: #eef8f3;
+    --wit: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
+    min-height: 100vh;
     font-family: Arial, sans-serif;
-    background-color: #f1f8f5;
-    color: #24332d;
+    color: var(--tekst);
+    background:
+        linear-gradient(
+            135deg,
+            #eef8f3 0%,
+            #e7f2ff 100%
+        );
 }
 
 header {
-    background-color: #29a36a;
-    color: white;
-    padding: 40px 20px;
+    padding: 48px 20px 65px;
+    color: var(--wit);
     text-align: center;
+    background:
+        linear-gradient(
+            135deg,
+            var(--groen),
+            #38b985
+        );
+    border-radius: 0 0 40px 40px;
+    box-shadow: 0 6px 20px rgba(20, 115, 78, 0.25);
 }
 
 header h1 {
     margin: 0;
-    font-size: 36px;
+    font-size: 38px;
 }
 
 header p {
-    margin-bottom: 0;
+    margin: 12px 0 0;
     font-size: 18px;
 }
 
 main {
-    max-width: 800px;
-    margin: 30px auto;
-    padding: 25px;
-    background-color: white;
-    border-radius: 16px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: -30px auto 40px;
+    padding: 30px;
+    background-color: var(--wit);
+    border-radius: 22px;
+    box-shadow: 0 10px 30px rgba(35, 70, 55, 0.15);
 }
 
-button {
-    background-color: #ff9f1c;
-    color: white;
-    border: none;
-    padding: 14px 20px;
-    border-radius: 10px;
-    font-size: 16px;
+h2 {
+    margin-top: 25px;
+    color: var(--donkergroen);
+}
+
+main > a {
+    display: inline-block;
+    margin-bottom: 15px;
+    padding: 10px 14px;
+    color: var(--donkergroen);
     font-weight: bold;
-    cursor: pointer;
+    text-decoration: none;
+    background-color: var(--lichtgroen);
+    border-radius: 10px;
 }
 
-button:hover {
-    background-color: #e8890a;
+main > a:hover {
+    background-color: #cdf0df;
 }
 
 .keuzemenu {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 22px;
 }
 
 .keuze-kaart {
-    padding: 25px;
-    color: #24332d;
+    padding: 32px 24px;
+    color: var(--tekst);
     text-align: center;
     text-decoration: none;
-    background-color: #e6f7ef;
+    background:
+        linear-gradient(
+            145deg,
+            #f5fffa,
+            var(--lichtgroen)
+        );
     border: 3px solid transparent;
-    border-radius: 15px;
+    border-radius: 18px;
+    box-shadow: 0 5px 16px rgba(35, 70, 55, 0.1);
     transition: 0.2s;
 }
 
 .keuze-kaart:hover {
-    border-color: #29a36a;
-    transform: translateY(-4px);
+    border-color: var(--groen);
+    box-shadow: 0 10px 22px rgba(35, 70, 55, 0.2);
+    transform: translateY(-6px);
+}
+
+.keuze-kaart h2 {
+    margin: 12px 0 8px;
+}
+
+.keuze-kaart p {
+    margin-bottom: 0;
 }
 
 .icoon {
-    font-size: 50px;
+    display: block;
+    font-size: 55px;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 9px;
+    padding: 22px;
+    background-color: #f8fcfa;
+    border: 2px solid #dcefe6;
+    border-radius: 16px;
 }
 
 label {
@@ -86,39 +141,163 @@ label {
 input,
 textarea,
 select {
-    padding: 12px;
+    width: 100%;
+    padding: 13px;
     font-family: inherit;
     font-size: 16px;
+    color: var(--tekst);
+    background-color: var(--wit);
     border: 2px solid #cbded5;
-    border-radius: 8px;
+    border-radius: 10px;
+    transition: 0.2s;
 }
 
 input:focus,
 textarea:focus,
 select:focus {
-    border-color: #29a36a;
+    border-color: var(--groen);
+    box-shadow: 0 0 0 4px rgba(29, 155, 104, 0.12);
     outline: none;
 }
 
 textarea {
-    min-height: 100px;
+    min-height: 105px;
     resize: vertical;
 }
 
-form button {
-    margin-top: 15px;
+button {
+    padding: 14px 20px;
+    color: var(--wit);
+    font-size: 16px;
+    font-weight: bold;
+    background:
+        linear-gradient(
+            135deg,
+            var(--oranje),
+            #ffb84d
+        );
+    border: none;
+    border-radius: 11px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(255, 159, 28, 0.3);
+    transition: 0.2s;
 }
 
-main > a {
-    display: inline-block;
-    margin-bottom: 20px;
-    color: #16794b;
+button:hover {
+    background:
+        linear-gradient(
+            135deg,
+            var(--donkeroranje),
+            var(--oranje)
+        );
+    transform: translateY(-2px);
+}
+
+form button {
+    margin-top: 18px;
+}
+
+section {
+    margin-top: 35px;
+}
+
+.bedragen {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.bedrag-kaart {
+    padding: 18px 12px;
+    text-align: center;
+    background-color: #edf5ff;
+    border-top: 5px solid var(--blauw);
+    border-radius: 13px;
+    box-shadow: 0 4px 12px rgba(35, 70, 55, 0.1);
+}
+
+.bedrag-kaart span {
+    display: block;
+    margin-bottom: 9px;
+    font-size: 14px;
+}
+
+.bedrag-kaart strong {
+    display: block;
+    font-size: 21px;
+}
+
+.winst-kaart {
+    background-color: #e9f9f1;
+    border-color: var(--groen);
+}
+
+.verlies-kaart {
+    background-color: #fff0f0;
+    border-color: var(--rood);
+}
+
+#fietsen-lijst,
+#reparatie-lijst {
+    display: grid;
+    gap: 16px;
+}
+
+.fiets-kaart {
+    padding: 20px;
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f3faf7
+        );
+    border-left: 7px solid var(--groen);
+    border-radius: 14px;
+    box-shadow: 0 5px 15px rgba(35, 70, 55, 0.12);
+}
+
+.fiets-kaart h3 {
+    margin-top: 0;
+    color: var(--donkergroen);
+    font-size: 22px;
+}
+
+.fiets-kaart p {
+    margin: 8px 0;
+}
+
+.positieve-winst {
+    color: var(--groen);
+    font-size: 18px;
     font-weight: bold;
 }
 
+.negatieve-winst {
+    color: var(--rood);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.verwijder-knop {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: var(--rood);
+    box-shadow: none;
+}
+
+.verwijder-knop:hover {
+    background: #b93737;
+}
+
+@media (max-width: 750px) {
+    .bedragen {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 600px) {
-    .keuzemenu {
-        grid-template-columns: 1fr;
+    header {
+        padding: 35px 15px 55px;
     }
 
     header h1 {
@@ -126,6 +305,19 @@ main > a {
     }
 
     main {
-        margin: 15px;
+        margin: -25px 12px 25px;
+        padding: 20px;
+    }
+
+    .keuzemenu {
+        grid-template-columns: 1fr;
+    }
+
+    .bedragen {
+        grid-template-columns: 1fr;
+    }
+
+    form {
+        padding: 16px;
     }
 }
