@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Mijn opknapfietsen</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -20,6 +22,7 @@
 
         <form id="opknap-formulier">
             <label for="fietsnaam">Naam van de fiets</label>
+
             <input
                 type="text"
                 id="fietsnaam"
@@ -28,22 +31,24 @@
             >
 
             <label for="inkoopprijs">Inkoopprijs in euro’s</label>
+
             <input
-                type="number"
+                type="text"
+                inputmode="decimal"
                 id="inkoopprijs"
-                min="0"
-                step="0.01"
-                placeholder="Bijvoorbeeld: 25"
+                placeholder="Bijvoorbeeld: 25,50"
                 required
             >
 
             <label for="reparaties">Wat moet eraan gebeuren?</label>
+
             <textarea
                 id="reparaties"
                 placeholder="Bijvoorbeeld: nieuwe band en remmen afstellen"
             ></textarea>
 
             <label for="status">Status</label>
+
             <select id="status">
                 <option>Gekocht</option>
                 <option>Bezig met opknappen</option>
@@ -53,6 +58,11 @@
 
             <button type="submit">Opknapfiets opslaan</button>
         </form>
+
+        <section>
+            <h2>Mijn opgeslagen opknapfietsen</h2>
+            <div id="fietsen-lijst"></div>
+        </section>
     </main>
 
     <script src="eigen-fietsen.js"></script>
