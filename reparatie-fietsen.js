@@ -1,195 +1,110 @@
-const formulier = document.getElementById("opknap-formulier");
-
+const formulier = document.getElementById("reparatie-formulier");
 const fietsnaamVeld = document.getElementById("fietsnaam");
-const inkoopprijsVeld = document.getElementById("inkoopprijs");
-const onderdelenkostenVeld =
-    document.getElementById("onderdelenkosten");
-const verkoopprijsVeld = document.getElementById("verkoopprijs");
+const eigenaarVeld = document.getElementById("eigenaar");
 const reparatiesVeld = document.getElementById("reparaties");
+const kostenVeld = document.getElementById("kosten");
+const ontvangenVeld = document.getElementById("ontvangen");
 const statusVeld = document.getElementById("status");
-const fietsenLijst = document.getElementById("fietsen-lijst");
+const spaarpotVeld = document.getElementById("spaarpotje");
+const fietsenLijst = document.getElementById("reparatie-lijst");
+let fietsen = JSON.parse(localStorage.getItem("reparatiefietsen-v1")) || [];
 
-let fietsen =
-    JSON.parse(localStorage.getItem("opknapfietsen")) || [];
-
-function bedragLezen(waarde) {
-    return Number(waarde.trim().replace(",", "."));
+function bedragLezen(waarde) { return Number(waarde.trim().replace(",", ".")); }
+function bedragTonen(bedrag) { return "€" + Number(bedrag || 0).toFixed(2).replace(".", ","); }
+function fietsenOpslaan() { localStorage.setItem("reparatiefietsen-v1", JSON.stringify(fietsen)); }
+function resultaatReparatie(fiets) {
+    if (fiets.ontvangenBedrag === null || fiets.ontvangenBedrag === undefined || fiets.ontvangenBedrag === "") return null;
+    return Number(fiets.ontvangenBedrag || 0) - Number(fiets.kosten || 0);
 }
 
-function bedragTonen(bedrag) {
-    return "€" + bedrag.toFixed(2).replace(".", ",");
+function financieelOverzichtBijwerken() {
+    let kosten = 0, omzet = 0, winst = 0, verlies = 0;
+    fietsen.forEach(function (fiets) {
+        kosten += Number(fiets.kosten || 0);
+        const resultaat = resultaatReparatie(fiets);
+        if (resultaat !== null) {
+            omzet += Number(fiets.ontvangenBedrag || 0);
+            if (resultaat >= 0) winst += resultaat;
+            else verlies += Math.abs(resultaat);
+        }
+    });
+    document.getElementById("totale-reparatiekosten").textContent = bedragTonen(kosten);
+    document.getElementById("totale-reparatieomzet").textContent = bedragTonen(omzet);
+    document.getElementById("totale-reparatiewinst").textContent = bedragTonen(winst);
+    document.getElementById("totale-reparatieverlies").textContent = bedragTonen(verlies);
 }
 
-function fietsenOpslaan() {
-    localStorage.setItem(
-        "opknapfietsen",
-        JSON.stringify(fietsen)
-    );
+function spaarpottenBerekenen() {
+    const potten = { Onderdelen: 0, Gereedschap: 0, "Vrij geld": 0 };
+    const opknapfietsen = JSON.parse(localStorage.getItem("opknapfietsen")) || [];
+    opknapfietsen.forEach(function (fiets) {
+        if (fiets.verkoopprijs === null || fiets.verkoopprijs === undefined || fiets.verkoopprijs === "") return;
+        const winst = Number(fiets.verkoopprijs || 0) - Number(fiets.inkoopprijs || 0) - Number(fiets.onderdelenkosten || 0);
+        if (winst > 0) potten[fiets.spaarpotje || "Vrij geld"] += winst;
+    });
+    fietsen.forEach(function (fiets) {
+        const winst = resultaatReparatie(fiets);
+        if (winst !== null && winst > 0) potten[fiets.spaarpotje || "Vrij geld"] += winst;
+    });
+    document.getElementById("pot-onderdelen").textContent = bedragTonen(potten.Onderdelen);
+    document.getElementById("pot-gereedschap").textContent = bedragTonen(potten.Gereedschap);
+    document.getElementById("pot-vrij-geld").textContent = bedragTonen(potten["Vrij geld"]);
 }
 
 function fietsenTonen() {
     fietsenLijst.innerHTML = "";
-
+    financieelOverzichtBijwerken(); spaarpottenBerekenen();
     if (fietsen.length === 0) {
         const melding = document.createElement("p");
-        melding.textContent =
-            "Er zijn nog geen opknapfietsen opgeslagen.";
-
+        melding.textContent = "Er zijn nog geen reparatiefietsen opgeslagen.";
         fietsenLijst.appendChild(melding);
         return;
     }
-
     fietsen.forEach(function (fiets) {
         const kaart = document.createElement("article");
         kaart.className = "fiets-kaart";
-
-        const inkoopprijs = Number(fiets.inkoopprijs) || 0;
-        const onderdelenkosten =
-            Number(fiets.onderdelenkosten) || 0;
-
-        let verkoopprijs = null;
-
-        if (
-            fiets.verkoopprijs !== null &&
-            fiets.verkoopprijs !== undefined &&
-            fiets.verkoopprijs !== ""
-        ) {
-            verkoopprijs = Number(fiets.verkoopprijs);
-        }
-
+        const resultaat = resultaatReparatie(fiets);
         const titel = document.createElement("h3");
         titel.textContent = fiets.naam;
-
-        const inkoop = document.createElement("p");
-        inkoop.textContent =
-            "Inkoopprijs: " + bedragTonen(inkoopprijs);
-
-        const onderdelen = document.createElement("p");
-        onderdelen.textContent =
-            "Onderdelen: " + bedragTonen(onderdelenkosten);
-
-        const totaleKosten = document.createElement("p");
-        totaleKosten.textContent =
-            "Totale kosten: " +
-            bedragTonen(inkoopprijs + onderdelenkosten);
-
-        const verkoop = document.createElement("p");
-
-        const winst = document.createElement("p");
-        winst.className = "winst";
-
-        if (verkoopprijs === null) {
-            verkoop.textContent = "Verkoopprijs: nog niet ingevuld";
-            winst.textContent = "Winst: nog niet bekend";
-        } else {
-            const berekendeWinst =
-                verkoopprijs - inkoopprijs - onderdelenkosten;
-
-            verkoop.textContent =
-                "Verkoopprijs: " + bedragTonen(verkoopprijs);
-
-            winst.textContent =
-                "Winst: " + bedragTonen(berekendeWinst);
-
-            if (berekendeWinst >= 0) {
-                winst.classList.add("positieve-winst");
-            } else {
-                winst.classList.add("negatieve-winst");
-            }
-        }
-
-        const werkzaamheden = document.createElement("p");
-        werkzaamheden.textContent =
-            "Werkzaamheden: " +
-            (fiets.reparaties || "Nog niet ingevuld");
-
-        const status = document.createElement("p");
-        status.textContent =
-            "Status: " + (fiets.status || "Gekocht");
-
+        kaart.appendChild(titel);
+        const details = [
+            "Eigenaar: " + fiets.eigenaar,
+            "Reparatie: " + (fiets.reparaties || "Nog niet ingevuld"),
+            "Onderdelenkosten: " + bedragTonen(fiets.kosten),
+            resultaat === null ? "Ontvangen: nog niet ingevuld" : "Ontvangen: " + bedragTonen(fiets.ontvangenBedrag),
+            resultaat === null ? "Winst: nog niet bekend" : (resultaat >= 0 ? "Winst: " : "Verlies: ") + bedragTonen(Math.abs(resultaat)),
+            "Spaarpotje: " + (fiets.spaarpotje || "Vrij geld"),
+            "Status: " + fiets.status
+        ];
+        details.forEach(function (tekst, index) {
+            const regel = document.createElement("p");
+            regel.textContent = tekst;
+            if (index === 4 && resultaat !== null) regel.className = resultaat >= 0 ? "positieve-winst" : "negatieve-winst";
+            kaart.appendChild(regel);
+        });
         const verwijderKnop = document.createElement("button");
         verwijderKnop.textContent = "Verwijderen";
         verwijderKnop.className = "verwijder-knop";
-
         verwijderKnop.addEventListener("click", function () {
-            fietsen = fietsen.filter(function (opgeslagenFiets) {
-                return opgeslagenFiets.id !== fiets.id;
-            });
-
-            fietsenOpslaan();
-            fietsenTonen();
+            fietsen = fietsen.filter(function (opgeslagenFiets) { return opgeslagenFiets.id !== fiets.id; });
+            fietsenOpslaan(); fietsenTonen();
         });
-
-        kaart.append(
-            titel,
-            inkoop,
-            onderdelen,
-            totaleKosten,
-            verkoop,
-            winst,
-            werkzaamheden,
-            status,
-            verwijderKnop
-        );
-
+        kaart.appendChild(verwijderKnop);
         fietsenLijst.appendChild(kaart);
     });
 }
 
 formulier.addEventListener("submit", function (gebeurtenis) {
     gebeurtenis.preventDefault();
-
     const naam = fietsnaamVeld.value.trim();
-    const reparaties = reparatiesVeld.value.trim();
-
-    const inkoopprijs = bedragLezen(inkoopprijsVeld.value);
-    const onderdelenkosten =
-        bedragLezen(onderdelenkostenVeld.value);
-
-    let verkoopprijs = null;
-
-    if (verkoopprijsVeld.value.trim() !== "") {
-        verkoopprijs = bedragLezen(verkoopprijsVeld.value);
-    }
-
-    if (naam === "") {
-        alert("Vul een naam voor de fiets in.");
-        return;
-    }
-
-    if (
-        Number.isNaN(inkoopprijs) ||
-        Number.isNaN(onderdelenkosten)
-    ) {
-        alert("Controleer de inkoopprijs en onderdelenkosten.");
-        return;
-    }
-
-    if (
-        verkoopprijs !== null &&
-        Number.isNaN(verkoopprijs)
-    ) {
-        alert("Controleer de verkoopprijs.");
-        return;
-    }
-
-    const nieuweFiets = {
-        id: Date.now(),
-        naam: naam,
-        inkoopprijs: inkoopprijs,
-        onderdelenkosten: onderdelenkosten,
-        verkoopprijs: verkoopprijs,
-        reparaties: reparaties || "Nog niet ingevuld",
-        status: statusVeld.value
-    };
-
-    fietsen.push(nieuweFiets);
-
-    fietsenOpslaan();
-    fietsenTonen();
-    formulier.reset();
-
-    alert("De opknapfiets is opgeslagen!");
+    const eigenaar = eigenaarVeld.value.trim();
+    const kosten = bedragLezen(kostenVeld.value);
+    const ontvangenBedrag = bedragLezen(ontvangenVeld.value);
+    if (!naam || !eigenaar) return alert("Vul de fiets en een voornaam of bijnaam in.");
+    if (Number.isNaN(kosten) || Number.isNaN(ontvangenBedrag)) return alert("Controleer de kosten en het ontvangen bedrag.");
+    fietsen.push({ id: Date.now(), naam, eigenaar, reparaties: reparatiesVeld.value.trim() || "Nog niet ingevuld", kosten, ontvangenBedrag, status: statusVeld.value, spaarpotje: spaarpotVeld.value });
+    fietsenOpslaan(); fietsenTonen(); formulier.reset();
+    alert("De reparatiefiets is opgeslagen!");
 });
 
 fietsenTonen();

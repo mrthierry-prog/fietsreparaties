@@ -1,388 +1,54 @@
-:root {
-    --groen: #1d9b68;
-    --donkergroen: #14734e;
-    --lichtgroen: #e5f7ef;
-    --oranje: #ff9f1c;
-    --donkeroranje: #e78600;
-    --rood: #dc4c4c;
-    --blauw: #3987d7;
-    --tekst: #24332d;
-    --wit: #ffffff;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    position: relative;
-    margin: 0;
-    min-height: 100vh;
-    color: var(--tekst);
-    font-family: Arial, sans-serif;
-    background-color: #edf7f2;
-    background-image:
-        radial-gradient(
-            circle,
-            rgba(29, 155, 104, 0.16) 2px,
-            transparent 2px
-        ),
-        linear-gradient(
-            135deg,
-            rgba(255, 255, 255, 0.75),
-            rgba(213, 238, 226, 0.75)
-        );
-    background-size:
-        28px 28px,
-        100% 100%;
-    background-attachment: fixed;
-}
-
-body::before,
-body::after {
-    position: fixed;
-    top: 150px;
-    z-index: 0;
-    color: var(--donkergroen);
-    font-size: 38px;
-    line-height: 2.2;
-    white-space: pre;
-    opacity: 0.18;
-    pointer-events: none;
-}
-
-body::before {
-    left: 28px;
-    content: "🚲\A🔧\A⚙️\A🛞";
-}
-
-body::after {
-    right: 28px;
-    content: "🛞\A⚙️\A🔧\A🚲";
-}
-
-header {
-    position: relative;
-    z-index: 1;
-    padding: 45px 20px 62px;
-    color: var(--wit);
-    text-align: center;
-    background:
-        linear-gradient(
-            135deg,
-            var(--groen),
-            #38b985
-        );
-    border-radius: 0 0 40px 40px;
-    box-shadow: 0 6px 20px rgba(20, 115, 78, 0.25);
-}
-
-header h1 {
-    margin: 0;
-    font-size: 38px;
-}
-
-header p {
-    margin: 12px 0 0;
-    font-size: 18px;
-}
-
-header::after {
-    display: block;
-    margin-top: 20px;
-    content: "🔧  •  🚲  •  ⚙️  •  🛞  •  🚲  •  🔧";
-    font-size: 22px;
-    letter-spacing: 4px;
-}
-
-main {
-    position: relative;
-    z-index: 1;
-    max-width: 900px;
-    margin: -30px auto 40px;
-    padding: 30px;
-    background-color: var(--wit);
-    border: 2px solid rgba(29, 155, 104, 0.15);
-    border-radius: 22px;
-    box-shadow: 0 10px 30px rgba(35, 70, 55, 0.16);
-}
-
-h2 {
-    margin-top: 25px;
-    color: var(--donkergroen);
-}
-
-main > a {
-    display: inline-block;
-    margin-bottom: 15px;
-    padding: 10px 14px;
-    color: var(--donkergroen);
-    font-weight: bold;
-    text-decoration: none;
-    background-color: var(--lichtgroen);
-    border-radius: 10px;
-}
-
-main > a:hover {
-    background-color: #cdf0df;
-}
-
-.keuzemenu {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 22px;
-}
-
-.keuze-kaart {
-    padding: 32px 24px;
-    color: var(--tekst);
-    text-align: center;
-    text-decoration: none;
-    background:
-        linear-gradient(
-            145deg,
-            #f5fffa,
-            var(--lichtgroen)
-        );
-    border: 3px solid transparent;
-    border-radius: 18px;
-    box-shadow: 0 5px 16px rgba(35, 70, 55, 0.1);
-    transition: 0.2s;
-}
-
-.keuze-kaart:hover {
-    border-color: var(--groen);
-    box-shadow: 0 10px 22px rgba(35, 70, 55, 0.2);
-    transform: translateY(-6px);
-}
-
-.keuze-kaart h2 {
-    margin: 12px 0 8px;
-}
-
-.icoon {
-    display: block;
-    font-size: 55px;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-    padding: 22px;
-    background:
-        linear-gradient(
-            135deg,
-            rgba(229, 247, 239, 0.7),
-            rgba(255, 255, 255, 0.95)
-        );
-    border: 2px solid #dcefe6;
-    border-radius: 16px;
-}
-
-label {
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-input,
-textarea,
-select {
-    width: 100%;
-    padding: 13px;
-    color: var(--tekst);
-    font-family: inherit;
-    font-size: 16px;
-    background-color: var(--wit);
-    border: 2px solid #cbded5;
-    border-radius: 10px;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-    border-color: var(--groen);
-    box-shadow: 0 0 0 4px rgba(29, 155, 104, 0.12);
-    outline: none;
-}
-
-textarea {
-    min-height: 105px;
-    resize: vertical;
-}
-
-button {
-    padding: 14px 20px;
-    color: var(--wit);
-    font-size: 16px;
-    font-weight: bold;
-    background:
-        linear-gradient(
-            135deg,
-            var(--oranje),
-            #ffb84d
-        );
-    border: none;
-    border-radius: 11px;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(255, 159, 28, 0.3);
-    transition: 0.2s;
-}
-
-button:hover {
-    background:
-        linear-gradient(
-            135deg,
-            var(--donkeroranje),
-            var(--oranje)
-        );
-    transform: translateY(-2px);
-}
-
-form button {
-    margin-top: 18px;
-}
-
-section {
-    margin-top: 35px;
-}
-
-.bedragen {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-}
-
-.bedrag-kaart {
-    padding: 18px 12px;
-    text-align: center;
-    background-color: #edf5ff;
-    border-top: 5px solid var(--blauw);
-    border-radius: 13px;
-    box-shadow: 0 4px 12px rgba(35, 70, 55, 0.1);
-}
-
-.bedrag-kaart span {
-    display: block;
-    margin-bottom: 9px;
-    font-size: 14px;
-}
-
-.bedrag-kaart strong {
-    display: block;
-    font-size: 21px;
-}
-
-.winst-kaart {
-    background-color: #e9f9f1;
-    border-color: var(--groen);
-}
-
-.verlies-kaart {
-    background-color: #fff0f0;
-    border-color: var(--rood);
-}
-
-#fietsen-lijst,
-#reparatie-lijst {
-    display: grid;
-    gap: 16px;
-}
-
-.fiets-kaart {
-    padding: 20px;
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #f3faf7
-        );
-    border-left: 7px solid var(--groen);
-    border-radius: 14px;
-    box-shadow: 0 5px 15px rgba(35, 70, 55, 0.12);
-}
-
-.fiets-kaart::before {
-    display: block;
-    margin-bottom: 8px;
-    content: "🚲 FIETSKAART";
-    color: var(--groen);
-    font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-.fiets-kaart h3 {
-    margin-top: 0;
-    color: var(--donkergroen);
-    font-size: 22px;
-}
-
-.fiets-kaart p {
-    margin: 8px 0;
-}
-
-.positieve-winst {
-    color: var(--groen);
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.negatieve-winst {
-    color: var(--rood);
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.verwijder-knop {
-    margin-top: 12px;
-    padding: 10px 14px;
-    background: var(--rood);
-    box-shadow: none;
-}
-
-.verwijder-knop:hover {
-    background: #b93737;
-}
-
-@media (max-width: 1100px) {
-    body::before,
-    body::after {
-        display: none;
-    }
-}
-
-@media (max-width: 750px) {
-    .bedragen {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 600px) {
-    header {
-        padding: 35px 15px 55px;
-    }
-
-    header h1 {
-        font-size: 28px;
-    }
-
-    header::after {
-        font-size: 16px;
-        letter-spacing: 1px;
-    }
-
-    main {
-        margin: -25px 12px 25px;
-        padding: 20px;
-    }
-
-    .keuzemenu,
-    .bedragen {
-        grid-template-columns: 1fr;
-    }
-
-    form {
-        padding: 16px;
-    }
-}
+:root { --groen:#1d9b68; --donkergroen:#14734e; --lichtgroen:#e5f7ef; --oranje:#ff9f1c; --donkeroranje:#e78600; --rood:#dc4c4c; --blauw:#3987d7; --tekst:#24332d; --wit:#fff; }
+* { box-sizing: border-box; }
+body { position:relative; margin:0; min-height:100vh; color:var(--tekst); font-family:Arial,sans-serif; background-color:#edf7f2; background-image:radial-gradient(circle,rgba(29,155,104,.16) 2px,transparent 2px),linear-gradient(135deg,rgba(255,255,255,.75),rgba(213,238,226,.75)); background-size:28px 28px,100% 100%; background-attachment:fixed; }
+body::before,body::after { position:fixed; top:150px; z-index:0; color:var(--donkergroen); font-size:38px; line-height:2.2; white-space:pre; opacity:.18; pointer-events:none; }
+body::before { left:28px; content:"🚲\A🔧\A⚙️\A🛞"; }
+body::after { right:28px; content:"🛞\A⚙️\A🔧\A🚲"; }
+header { position:relative; z-index:1; padding:45px 20px 62px; color:var(--wit); text-align:center; background:linear-gradient(135deg,var(--groen),#38b985); border-radius:0 0 40px 40px; box-shadow:0 6px 20px rgba(20,115,78,.25); }
+header h1 { margin:0; font-size:38px; }
+header p { margin:12px 0 0; font-size:18px; }
+header::after { display:block; margin-top:20px; content:"🔧  •  🚲  •  ⚙️  •  🛞  •  🚲  •  🔧"; font-size:22px; letter-spacing:4px; }
+main { position:relative; z-index:1; max-width:900px; margin:-30px auto 40px; padding:30px; background:var(--wit); border:2px solid rgba(29,155,104,.15); border-radius:22px; box-shadow:0 10px 30px rgba(35,70,55,.16); }
+h2 { margin-top:25px; color:var(--donkergroen); }
+main>a { display:inline-block; margin-bottom:15px; padding:10px 14px; color:var(--donkergroen); font-weight:bold; text-decoration:none; background:var(--lichtgroen); border-radius:10px; }
+.keuzemenu { display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
+.keuze-kaart { padding:32px 24px; color:var(--tekst); text-align:center; text-decoration:none; background:linear-gradient(145deg,#f5fffa,var(--lichtgroen)); border:3px solid transparent; border-radius:18px; box-shadow:0 5px 16px rgba(35,70,55,.1); transition:.2s; }
+.keuze-kaart:hover { border-color:var(--groen); transform:translateY(-6px); }
+.icoon { display:block; font-size:55px; }
+form { display:flex; flex-direction:column; gap:9px; padding:22px; background:linear-gradient(135deg,rgba(229,247,239,.7),rgba(255,255,255,.95)); border:2px solid #dcefe6; border-radius:16px; }
+label { margin-top:10px; font-weight:bold; }
+input,textarea,select { width:100%; padding:13px; color:var(--tekst); font:16px inherit; background:var(--wit); border:2px solid #cbded5; border-radius:10px; }
+input:focus,textarea:focus,select:focus { border-color:var(--groen); box-shadow:0 0 0 4px rgba(29,155,104,.12); outline:none; }
+textarea { min-height:105px; resize:vertical; }
+button { padding:14px 20px; color:var(--wit); font-size:16px; font-weight:bold; background:linear-gradient(135deg,var(--oranje),#ffb84d); border:0; border-radius:11px; cursor:pointer; transition:.2s; }
+button:hover { background:linear-gradient(135deg,var(--donkeroranje),var(--oranje)); transform:translateY(-2px); }
+form button { margin-top:18px; }
+section { margin-top:35px; }
+.bedragen { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+.bedrag-kaart { padding:18px 12px; text-align:center; background:#edf5ff; border-top:5px solid var(--blauw); border-radius:13px; box-shadow:0 4px 12px rgba(35,70,55,.1); }
+.bedrag-kaart span,.bedrag-kaart strong { display:block; }
+.bedrag-kaart span { margin-bottom:9px; font-size:14px; }
+.bedrag-kaart strong { font-size:21px; }
+.winst-kaart { background:#e9f9f1; border-color:var(--groen); }
+.verlies-kaart { background:#fff0f0; border-color:var(--rood); }
+.spaarpotten { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.spaarpot-kaart { padding:20px 14px; text-align:center; border-radius:16px; box-shadow:0 4px 12px rgba(35,70,55,.1); }
+.spaarpot-kaart span,.spaarpot-kaart strong { display:block; }
+.spaarpot-kaart span { margin-bottom:10px; font-weight:bold; }
+.spaarpot-kaart strong { font-size:24px; }
+.onderdelen-pot { background:#edf5ff; border-top:5px solid var(--blauw); }
+.gereedschap-pot { background:#fff4df; border-top:5px solid var(--oranje); }
+.vrij-pot { background:#f3ecff; border-top:5px solid #8b5cf6; }
+.uitleg { color:#5b6d65; font-size:14px; }
+#fietsen-lijst,#reparatie-lijst { display:grid; gap:16px; }
+.fiets-kaart { padding:20px; background:linear-gradient(145deg,#fff,#f3faf7); border-left:7px solid var(--groen); border-radius:14px; box-shadow:0 5px 15px rgba(35,70,55,.12); }
+.fiets-kaart::before { display:block; margin-bottom:8px; content:"🚲 FIETSKAART"; color:var(--groen); font-size:12px; font-weight:bold; letter-spacing:1px; }
+.fiets-kaart h3 { margin-top:0; color:var(--donkergroen); font-size:22px; }
+.fiets-kaart p { margin:8px 0; }
+.positieve-winst { color:var(--groen); font-size:18px; font-weight:bold; }
+.negatieve-winst { color:var(--rood); font-size:18px; font-weight:bold; }
+.verwijder-knop { margin-top:12px; padding:10px 14px; background:var(--rood); }
+.verwijder-knop:hover { background:#b93737; }
+@media(max-width:1100px){body::before,body::after{display:none}}
+@media(max-width:750px){.bedragen{grid-template-columns:repeat(2,1fr)}.spaarpotten{grid-template-columns:1fr}}
+@media(max-width:600px){header{padding:35px 15px 55px}header h1{font-size:28px}header::after{font-size:16px;letter-spacing:1px}main{margin:-25px 12px 25px;padding:20px}.keuzemenu,.bedragen{grid-template-columns:1fr}form{padding:16px}}

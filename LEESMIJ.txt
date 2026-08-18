@@ -1,0 +1,19 @@
+KINDERFIETS WERKPLAATS
+
+Zo open je de app op je laptop:
+
+1. Pak het zipbestand uit.
+2. Open de map fietsreparatie-app.
+3. Dubbelklik op index.html.
+4. De website opent in Chrome, Edge of een andere browser.
+
+Houd alle bestanden bij elkaar in dezelfde map.
+
+De opgeslagen fietsen worden alleen bewaard in de browser waarin je de app gebruikt.
+Gegevens die op de online GitHub-versie zijn opgeslagen, worden niet automatisch meegenomen naar de laptopversie.
+
+De app heeft drie spaarpotjes: Onderdelen, Gereedschap en Vrij geld.
+Bij iedere fiets kies je naar welk spaarpotje de positieve winst gaat.
+De potjes tellen winst uit opknapfietsen en reparatiefietsen bij elkaar op.
+
+Deel geen adressen, telefoonnummers of volledige namen via een openbare website.

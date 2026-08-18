@@ -3,121 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Mijn opknapfietsen</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <header>
         <h1>🚲 Mijn opknapfietsen</h1>
         <p>Hier houd ik bij welke fietsen ik zelf opknap.</p>
     </header>
-
     <main>
         <a href="index.html">← Terug naar de homepagina</a>
-
         <h2>Nieuwe opknapfiets</h2>
-
         <form id="opknap-formulier">
             <label for="fietsnaam">Naam van de fiets</label>
-
-            <input
-                type="text"
-                id="fietsnaam"
-                placeholder="Bijvoorbeeld: Blauwe kinderfiets"
-                required
-            >
-
+            <input type="text" id="fietsnaam" placeholder="Bijvoorbeeld: Blauwe kinderfiets" required>
             <label for="inkoopprijs">Inkoopprijs</label>
-
-            <input
-                type="text"
-                inputmode="decimal"
-                id="inkoopprijs"
-                placeholder="Bijvoorbeeld: 25,50"
-                required
-            >
-
-            <label for="onderdelenkosten">
-                Kosten van onderdelen
-            </label>
-
-            <input
-                type="text"
-                inputmode="decimal"
-                id="onderdelenkosten"
-                placeholder="Bijvoorbeeld: 12,50"
-                required
-            >
-
-            <label for="verkoopprijs">
-                Verkoopprijs (mag nog leeg blijven)
-            </label>
-
-            <input
-                type="text"
-                inputmode="decimal"
-                id="verkoopprijs"
-                placeholder="Bijvoorbeeld: 85"
-            >
-
-            <label for="reparaties">
-                Wat moet eraan gebeuren?
-            </label>
-
-            <textarea
-                id="reparaties"
-                placeholder="Bijvoorbeeld: nieuwe band en remmen afstellen"
-            ></textarea>
-
+            <input type="text" inputmode="decimal" id="inkoopprijs" placeholder="Bijvoorbeeld: 25,50" required>
+            <label for="onderdelenkosten">Kosten van onderdelen</label>
+            <input type="text" inputmode="decimal" id="onderdelenkosten" placeholder="Bijvoorbeeld: 12,50" required>
+            <label for="verkoopprijs">Verkoopprijs (mag nog leeg blijven)</label>
+            <input type="text" inputmode="decimal" id="verkoopprijs" placeholder="Bijvoorbeeld: 85">
+            <label for="reparaties">Wat moet eraan gebeuren?</label>
+            <textarea id="reparaties" placeholder="Bijvoorbeeld: nieuwe band en remmen afstellen"></textarea>
             <label for="status">Status</label>
-
             <select id="status">
                 <option>Gekocht</option>
                 <option>Bezig met opknappen</option>
                 <option>Klaar voor verkoop</option>
                 <option>Verkocht</option>
             </select>
-
-            <button type="submit">
-                Opknapfiets opslaan
-            </button>
+            <label for="spaarpotje">Naar welk spaarpotje gaat de winst?</label>
+            <select id="spaarpotje">
+                <option>Onderdelen</option>
+                <option>Gereedschap</option>
+                <option>Vrij geld</option>
+            </select>
+            <button type="submit">Opknapfiets opslaan</button>
         </form>
-
         <section class="financieel-overzicht">
             <h2>💶 Financieel overzicht</h2>
-
             <div class="bedragen">
-                <div class="bedrag-kaart">
-                    <span>Totale kosten</span>
-                    <strong id="totale-kosten">€0,00</strong>
-                </div>
-
-                <div class="bedrag-kaart">
-                    <span>Verkoopopbrengst</span>
-                    <strong id="totale-omzet">€0,00</strong>
-                </div>
-
-                <div class="bedrag-kaart winst-kaart">
-                    <span>Winst</span>
-                    <strong id="totale-winst">€0,00</strong>
-                </div>
-
-                <div class="bedrag-kaart verlies-kaart">
-                    <span>Verlies</span>
-                    <strong id="totale-verlies">€0,00</strong>
-                </div>
+                <div class="bedrag-kaart"><span>Totale kosten</span><strong id="totale-kosten">€0,00</strong></div>
+                <div class="bedrag-kaart"><span>Verkoopopbrengst</span><strong id="totale-omzet">€0,00</strong></div>
+                <div class="bedrag-kaart winst-kaart"><span>Winst</span><strong id="totale-winst">€0,00</strong></div>
+                <div class="bedrag-kaart verlies-kaart"><span>Verlies</span><strong id="totale-verlies">€0,00</strong></div>
             </div>
         </section>
-
+        <section class="spaarpot-overzicht">
+            <h2>🐷 Mijn spaarpotjes</h2>
+            <div class="spaarpotten">
+                <div class="spaarpot-kaart onderdelen-pot"><span>🔩 Onderdelen</span><strong id="pot-onderdelen">€0,00</strong></div>
+                <div class="spaarpot-kaart gereedschap-pot"><span>🔧 Gereedschap</span><strong id="pot-gereedschap">€0,00</strong></div>
+                <div class="spaarpot-kaart vrij-pot"><span>🎉 Vrij geld</span><strong id="pot-vrij-geld">€0,00</strong></div>
+            </div>
+            <p class="uitleg">Alleen positieve winst wordt bij het gekozen spaarpotje opgeteld.</p>
+        </section>
         <section>
             <h2>Mijn opgeslagen opknapfietsen</h2>
             <div id="fietsen-lijst"></div>
         </section>
     </main>
-
-    <script src="eigen-fietsen.js?v=7"></script>
+    <script src="eigen-fietsen.js"></script>
 </body>
 </html>
