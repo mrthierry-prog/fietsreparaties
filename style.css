@@ -40,6 +40,14 @@ section { margin-top:35px; }
 .gereedschap-pot { background:#fff4df; border-top:5px solid var(--oranje); }
 .vrij-pot { background:#f3ecff; border-top:5px solid #8b5cf6; }
 .uitleg { color:#5b6d65; font-size:14px; }
+.veld-uitleg { margin:0 0 5px; color:#5b6d65; font-size:13px; }
+.checklist { margin:14px 0; padding:14px; background:#f6fbf8; border:1px solid #dcefe6; border-radius:12px; }
+.checklist h4 { margin:0 0 10px; color:var(--donkergroen); }
+.checklist-item { display:flex; align-items:center; gap:10px; margin:7px 0; padding:8px 10px; background:#fff; border-radius:8px; cursor:pointer; }
+.checklist-item input { width:auto; margin:0; accent-color:var(--groen); transform:scale(1.2); }
+.checklist-item span { flex:1; }
+.checklist-item.klaar span { color:#718078; text-decoration:line-through; }
+.checklist-voortgang { margin:10px 0 0; color:var(--donkergroen); font-size:14px; font-weight:bold; }
 #fietsen-lijst,#reparatie-lijst { display:grid; gap:16px; }
 .fiets-kaart { padding:20px; background:linear-gradient(145deg,#fff,#f3faf7); border-left:7px solid var(--groen); border-radius:14px; box-shadow:0 5px 15px rgba(35,70,55,.12); }
 .fiets-kaart::before { display:block; margin-bottom:8px; content:"🚲 FIETSKAART"; color:var(--groen); font-size:12px; font-weight:bold; letter-spacing:1px; }

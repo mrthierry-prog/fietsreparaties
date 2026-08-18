@@ -17,6 +17,51 @@ function resultaatReparatie(fiets) {
     return Number(fiets.ontvangenBedrag || 0) - Number(fiets.kosten || 0);
 }
 
+function takenVanFiets(fiets) {
+    if (Array.isArray(fiets.taken)) return fiets.taken;
+    const oudeTekst = fiets.reparaties && fiets.reparaties !== "Nog niet ingevuld" ? fiets.reparaties : "";
+    fiets.taken = oudeTekst.split(/\r?\n/).map(function (tekst) { return tekst.trim(); }).filter(Boolean).map(function (tekst) { return { tekst, klaar: false }; });
+    return fiets.taken;
+}
+
+function checklistToevoegen(kaart, fiets) {
+    const taken = takenVanFiets(fiets);
+    const checklist = document.createElement("div");
+    checklist.className = "checklist";
+    const kop = document.createElement("h4");
+    kop.textContent = "✅ Reparatiechecklist";
+    checklist.appendChild(kop);
+    if (taken.length === 0) {
+        const leeg = document.createElement("p");
+        leeg.textContent = "Geen taken opgegeven.";
+        checklist.appendChild(leeg);
+    }
+    taken.forEach(function (taak, index) {
+        const regel = document.createElement("label");
+        regel.className = "checklist-item" + (taak.klaar ? " klaar" : "");
+        const vinkje = document.createElement("input");
+        vinkje.type = "checkbox";
+        vinkje.checked = Boolean(taak.klaar);
+        const tekst = document.createElement("span");
+        tekst.textContent = taak.tekst;
+        vinkje.addEventListener("change", function () {
+            fiets.taken[index].klaar = vinkje.checked;
+            fietsenOpslaan();
+            fietsenTonen();
+        });
+        regel.append(vinkje, tekst);
+        checklist.appendChild(regel);
+    });
+    if (taken.length > 0) {
+        const klaar = taken.filter(function (taak) { return taak.klaar; }).length;
+        const voortgang = document.createElement("p");
+        voortgang.className = "checklist-voortgang";
+        voortgang.textContent = klaar + " van " + taken.length + " taken klaar";
+        checklist.appendChild(voortgang);
+    }
+    kaart.appendChild(checklist);
+}
+
 function financieelOverzichtBijwerken() {
     let kosten = 0, omzet = 0, winst = 0, verlies = 0;
     fietsen.forEach(function (fiets) {
@@ -69,7 +114,6 @@ function fietsenTonen() {
         kaart.appendChild(titel);
         const details = [
             "Eigenaar: " + fiets.eigenaar,
-            "Reparatie: " + (fiets.reparaties || "Nog niet ingevuld"),
             "Onderdelenkosten: " + bedragTonen(fiets.kosten),
             resultaat === null ? "Ontvangen: nog niet ingevuld" : "Ontvangen: " + bedragTonen(fiets.ontvangenBedrag),
             resultaat === null ? "Winst: nog niet bekend" : (resultaat >= 0 ? "Winst: " : "Verlies: ") + bedragTonen(Math.abs(resultaat)),
@@ -79,9 +123,10 @@ function fietsenTonen() {
         details.forEach(function (tekst, index) {
             const regel = document.createElement("p");
             regel.textContent = tekst;
-            if (index === 4 && resultaat !== null) regel.className = resultaat >= 0 ? "positieve-winst" : "negatieve-winst";
+            if (index === 3 && resultaat !== null) regel.className = resultaat >= 0 ? "positieve-winst" : "negatieve-winst";
             kaart.appendChild(regel);
         });
+        checklistToevoegen(kaart, fiets);
         const verwijderKnop = document.createElement("button");
         verwijderKnop.textContent = "Verwijderen";
         verwijderKnop.className = "verwijder-knop";
@@ -102,7 +147,8 @@ formulier.addEventListener("submit", function (gebeurtenis) {
     const ontvangenBedrag = bedragLezen(ontvangenVeld.value);
     if (!naam || !eigenaar) return alert("Vul de fiets en een voornaam of bijnaam in.");
     if (Number.isNaN(kosten) || Number.isNaN(ontvangenBedrag)) return alert("Controleer de kosten en het ontvangen bedrag.");
-    fietsen.push({ id: Date.now(), naam, eigenaar, reparaties: reparatiesVeld.value.trim() || "Nog niet ingevuld", kosten, ontvangenBedrag, status: statusVeld.value, spaarpotje: spaarpotVeld.value });
+    const taken = reparatiesVeld.value.split(/\r?\n/).map(function (tekst) { return tekst.trim(); }).filter(Boolean).map(function (tekst) { return { tekst, klaar: false }; });
+    fietsen.push({ id: Date.now(), naam, eigenaar, reparaties: reparatiesVeld.value.trim() || "Nog niet ingevuld", taken, kosten, ontvangenBedrag, status: statusVeld.value, spaarpotje: spaarpotVeld.value });
     fietsenOpslaan(); fietsenTonen(); formulier.reset();
     alert("De reparatiefiets is opgeslagen!");
 });

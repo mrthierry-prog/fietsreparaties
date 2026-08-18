@@ -16,4 +16,8 @@ De app heeft drie spaarpotjes: Onderdelen, Gereedschap en Vrij geld.
 Bij iedere fiets kies je naar welk spaarpotje de positieve winst gaat.
 De potjes tellen winst uit opknapfietsen en reparatiefietsen bij elkaar op.
 
+Checklist:
+Typ bij werkzaamheden iedere taak op een nieuwe regel. Na het opslaan kun je
+iedere taak afvinken. De vinkjes blijven in dezelfde browser bewaard.
+
 Deel geen adressen, telefoonnummers of volledige namen via een openbare website.
